@@ -17,7 +17,7 @@ def start_crawl():
     # initializing seed URL
     seed_url = 'https://www.cc.gatech.edu/news/1'
 
-    print("\nSetting seed URL to {}".format(seed_url))
+    print(f"\nSetting seed URL to {seed_url}")
 
     # get number of pages
     first_page = requests.get(seed_url)
@@ -62,7 +62,7 @@ def start_crawl():
 
             queue_stats_df = queue_stats_df.append({'elaped_time':format(time.time() - t, '.2f'), 'pages_queued':len(url_queue)}, ignore_index=True)
 
-    print("Found {} URLs linked to seed URL".format(len(url_queue)))
+    print(f"Found {len(url_queue)} URLs linked to seed URL")
 
     ### VISITING URLS ###
     t = time.time()
@@ -86,7 +86,7 @@ def start_crawl():
             main_content = article_page_soup.find_all("section", {"id":"main"})[0]
             
             # outputting to console
-            print("Crawling URL {} / {}".format(article_number, len(url_queue)), end="\r")
+            print(f"Crawling URL {article_number} / {len(url_queue)}", end="\r")
 
             visited_urls.append(article_url)
             df = df.append({'title':article_title, 'date':article_date, 'url': article_url, 'html_content': main_content}, ignore_index=True)
